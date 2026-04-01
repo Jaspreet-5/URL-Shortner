@@ -8,6 +8,6 @@ if (!process.env.MONGO_URI) {
 }
 connectDB(); //connecting to database
 
-app.listen(10000 , ()=>{
+app.listen(process.env.PORT || 3000 , ()=>{
     console.log("App listening on port 3000");
 })
