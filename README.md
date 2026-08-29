@@ -159,7 +159,7 @@ http://localhost:3000
 Create a short URL:
 
 ```bash
-curl -X POST http://localhost:3000/api/url/upload \
+curl -X POST https://url-shortner-58jo.onrender.com/api/url/upload \
   -H "Content-Type: application/json" \
   -d '{"url":"https://www.example.com"}'
 ```
