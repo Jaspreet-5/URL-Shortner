@@ -1,24 +1,33 @@
 const mongoose = require("mongoose");
 
-const urlSchema = new mongoose.Schema({
-    shortCode :{
-        type : String,
-        index : true,
-        required : [true , "shortURL is required"],
-        unique : [true , "shortURL must be unique"]
-    },
+const urlSchema = new mongoose.Schema(
+    {
+        shortCode: {
+            type: String,
+            required: [true, "shortURL is required"],
+            unique: true,
+            index: true,
+            trim: true
+        },
 
-    originalURL : {
-        type : String,
-        required : [true,"orgURL is required"],
-    },
+        originalURL: {
+            type: String,
+            required: [true, "originalURL is required"],
+            unique: true,
+            trim: true
+        },
 
-    clicks : {
-        type : Number,
-        default : 0
+        clicks: {
+            type: Number,
+            default: 0,
+            min: 0
+        }
+    },
+    {
+        timestamps: true
     }
-},{timestamps : true})
+);
 
-const urlModel = mongoose.model("URL" , urlSchema);
+const urlModel = mongoose.model("URL", urlSchema);
 
 module.exports = urlModel;

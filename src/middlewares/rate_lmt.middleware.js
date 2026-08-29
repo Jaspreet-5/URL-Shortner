@@ -22,9 +22,13 @@ function rateLimiter(options = {}) {
         const bucket = users.get(ip);
 
         const timePassed = now - bucket.lastRefill;
-        const tokensToAdd = timePassed * refillRate;
+        const tokensAdded = timePassed * refillRate;
 
-        bucket.tokens = Math.min(bucketSize, bucket.tokens + tokensToAdd);
+        bucket.tokens = Math.min(
+            bucketSize,
+            bucket.tokens + tokensAdded
+        );
+
         bucket.lastRefill = now;
 
         if (bucket.tokens < 1) {
@@ -34,10 +38,6 @@ function rateLimiter(options = {}) {
         }
 
         bucket.tokens -= 1;
-
-        if(bucket.tokens >= bucketSize && timePassed>60000){
-            users.delete(ip);
-        }
 
         next();
     };
